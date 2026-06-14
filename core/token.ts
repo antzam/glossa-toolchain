@@ -4,7 +4,7 @@ type Location = {
   offset: number;
 };
 
-enum TokenType {
+export enum TokenType {
   Eof = "EOF",
 }
 
