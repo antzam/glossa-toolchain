@@ -5,6 +5,7 @@ type Location = {
 };
 
 export enum TokenType {
+  Eol = "EOL",
   Eof = "EOF",
 }
 

@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertThrows } from "@std/assert";
 import { TokenType } from "./token.ts";
 import { tokenize } from "./lexer.ts";
 
@@ -42,4 +42,59 @@ Deno.test("ignores input with only whitespace", () => {
       end: { line: 1, column: 9, offset: 8 },
     },
   }]);
+});
+
+for (
+  const newline of [{ input: "\n", description: "'\\n'" }, {
+    input: "\r",
+    description: "'\\r'",
+  }]
+) {
+  Deno.test(`recognizes newline character ${newline.description}`, () => {
+    assertEquals(Array.from(tokenize(newline.input)), [{
+      type: TokenType.Eol,
+      lexeme: newline.input,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: { line: 2, column: 1, offset: 1 },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: { line: 2, column: 1, offset: 1 },
+        end: { line: 2, column: 2, offset: 2 },
+      },
+    }]);
+  });
+}
+
+Deno.test("recognizes newline sequence '\r\n'", () => {
+  assertEquals(Array.from(tokenize("\r\n")), [{
+    type: TokenType.Eol,
+    lexeme: "\r\n",
+    location: {
+      start: { line: 1, column: 1, offset: 0 },
+      end: { line: 2, column: 1, offset: 2 },
+    },
+  }, {
+    type: TokenType.Eof,
+    lexeme: "\0",
+    location: {
+      start: { line: 2, column: 1, offset: 2 },
+      end: { line: 2, column: 2, offset: 3 },
+    },
+  }]);
+});
+
+// TODO: replace exceptions with error reporting
+Deno.test("throws error on unexpected character", () => {
+  const input = "@";
+  assertThrows(
+    () => {
+      Array.from(tokenize(input));
+    },
+    Error,
+    "Unexpected character",
+  );
 });
