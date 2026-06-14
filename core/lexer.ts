@@ -8,7 +8,7 @@ export function* tokenize(input: string) {
 
   const MATCHERS = [
     {
-      regexp: /^[ \t]+/,
+      regexp: /[ \t]+/g,
       handler: (match: RegExpExecArray): null => {
         column += match[0].length;
         offset += match[0].length;
@@ -17,7 +17,7 @@ export function* tokenize(input: string) {
       },
     },
     {
-      regexp: /^\r\n|\r|\n/,
+      regexp: /\r\n|\r|\n/g,
       handler: (match: RegExpExecArray): Token => {
         const startLine = line;
         const startColumn = column;
@@ -42,7 +42,7 @@ export function* tokenize(input: string) {
       },
     },
     {
-      regexp: /^[():,+\-*\/]/,
+      regexp: /[():,+\-*\/]/g,
       handler: (match: RegExpExecArray): Token => {
         const startColumn = column;
         const startOffset = offset;
@@ -91,9 +91,10 @@ export function* tokenize(input: string) {
     },
   ];
 
-  while (input.length > 0) {
+  while (offset < input.length) {
     let matched = false;
     for (const matcher of MATCHERS) {
+      matcher.regexp.lastIndex = offset;
       const match = matcher.regexp.exec(input);
       if (match !== null) {
         matched = true;
@@ -102,8 +103,6 @@ export function* tokenize(input: string) {
         if (token !== null) {
           yield token;
         }
-
-        input = input.slice(match[0].length);
       }
     }
 

@@ -87,6 +87,44 @@ Deno.test("recognizes newline sequence '\r\n'", () => {
   }]);
 });
 
+Deno.test("recognizes multiple newlines with intervening whitespace", () => {
+  const input = "   \n\t\n \t \n";
+  assertEquals(Array.from(tokenize(input)), [
+    {
+      type: TokenType.Eol,
+      lexeme: "\n",
+      location: {
+        start: { line: 1, column: 4, offset: 3 },
+        end: { line: 2, column: 1, offset: 4 },
+      },
+    },
+    {
+      type: TokenType.Eol,
+      lexeme: "\n",
+      location: {
+        start: { line: 2, column: 2, offset: 5 },
+        end: { line: 3, column: 1, offset: 6 },
+      },
+    },
+    {
+      type: TokenType.Eol,
+      lexeme: "\n",
+      location: {
+        start: { line: 3, column: 4, offset: 9 },
+        end: { line: 4, column: 1, offset: 10 },
+      },
+    },
+    {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: { line: 4, column: 1, offset: 10 },
+        end: { line: 4, column: 2, offset: 11 },
+      },
+    },
+  ]);
+});
+
 const SINGLE_CHAR_PUNCTUATION = [
   { input: "(", type: TokenType.LeftParen },
   { input: ")", type: TokenType.RightParen },
