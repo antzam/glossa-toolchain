@@ -90,7 +90,7 @@ export function* tokenize(input: string) {
       },
     },
     {
-      regexp: /[_A-Za-zΆΈ-ΊΌΎ-ΡΣ-ώ]+/g,
+      regexp: /[0-9A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ]+/g,
       handler: (match: RegExpExecArray): Token => {
         const startColumn = column;
         const startOffset = offset;

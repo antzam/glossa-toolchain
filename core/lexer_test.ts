@@ -214,7 +214,14 @@ Deno.test("recognizes single underscore as identifier", () => {
   }]);
 });
 
-for (const identifier of ["arTDkm_Άτρς", "ρ__ΕΦΤμαqqqz_mPR", "_θTHΫώςwGR"]) {
+for (
+  const identifier of [
+    "arTDkm_Άτρς",
+    "ρ__ΕΦΤμαqqqz_mPR",
+    "_θTHΫώςwGR",
+    "Δer93_ΏFEXQπ__",
+  ]
+) {
   Deno.test(`recognizes mixed-character identifier '${identifier}'`, () => {
     assertEquals(Array.from(tokenize(identifier)), [{
       type: TokenType.Identifier,
