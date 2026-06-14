@@ -1,12 +1,13 @@
 import { TokenType } from "./token.ts";
 
-export function* tokenize(_input: string) {
+export function* tokenize(input: string) {
+  const inputLength = input.length;
   yield {
     type: TokenType.Eof,
     lexeme: "\0",
     location: {
-      start: { line: 1, column: 8, offset: 7 },
-      end: { line: 1, column: 9, offset: 8 },
+      start: { line: 1, column: inputLength + 1, offset: inputLength },
+      end: { line: 1, column: inputLength + 2, offset: inputLength + 1 },
     },
   };
 }
