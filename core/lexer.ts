@@ -36,7 +36,7 @@ export function* tokenize(input: string) {
               column: startColumn,
               offset: startOffset,
             },
-            end: { line: line, column: column, offset: offset },
+            end: { line, column, offset },
           },
         };
       },
