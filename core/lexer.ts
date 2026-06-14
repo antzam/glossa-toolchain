@@ -90,13 +90,13 @@ export function* tokenize(input: string) {
       },
     },
     {
-      regexp: /[_A-Za-zΆΈ-ΊΌΎ-ΡΣ-ώ]/g,
+      regexp: /[_A-Za-zΆΈ-ΊΌΎ-ΡΣ-ώ]+/g,
       handler: (match: RegExpExecArray): Token => {
         const startColumn = column;
         const startOffset = offset;
 
-        column += 1;
-        offset += 1;
+        column += match[0].length;
+        offset += match[0].length;
 
         return {
           type: TokenType.Identifier,

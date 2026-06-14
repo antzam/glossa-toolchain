@@ -214,6 +214,38 @@ Deno.test("recognizes single underscore as identifier", () => {
   }]);
 });
 
+for (const identifier of ["arTDkm_Άτρς", "ρ__ΕΦΤμαqqqz_mPR", "_θTHΫώςwGR"]) {
+  Deno.test(`recognizes mixed-character identifier '${identifier}'`, () => {
+    assertEquals(Array.from(tokenize(identifier)), [{
+      type: TokenType.Identifier,
+      lexeme: identifier,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: {
+          line: 1,
+          column: identifier.length + 1,
+          offset: identifier.length,
+        },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: {
+          line: 1,
+          column: identifier.length + 1,
+          offset: identifier.length,
+        },
+        end: {
+          line: 1,
+          column: identifier.length + 2,
+          offset: identifier.length + 1,
+        },
+      },
+    }]);
+  });
+}
+
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
   const input = "@";
