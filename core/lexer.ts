@@ -1,4 +1,3 @@
-import type { Token } from "./token.ts";
 import { TokenType } from "./token.ts";
 
 const KEYWORDS = new Map(
@@ -23,161 +22,53 @@ export function* tokenize(input: string) {
   const MATCHERS = [
     {
       regexp: /[ \t]+/y,
-      handler: (match: RegExpExecArray): null => {
-        column += match[0].length;
-        offset += match[0].length;
-
-        return null;
-      },
+      handler: () => null,
     },
     {
       regexp: /\r\n|\r|\n/y,
-      handler: (match: RegExpExecArray): Token => {
-        const startLine = line;
-        const startColumn = column;
-        const startOffset = offset;
-
-        line += 1;
-        column = 1;
-        offset += match[0].length;
-
-        return {
-          type: TokenType.Eol,
-          lexeme: match[0],
-          location: {
-            start: {
-              line: startLine,
-              column: startColumn,
-              offset: startOffset,
-            },
-            end: { line, column, offset },
-          },
-        };
-      },
+      handler: () => TokenType.Eol,
     },
     {
       regexp: /[():,+\-*\/]/y,
-      handler: (match: RegExpExecArray): Token => {
-        const startColumn = column;
-        const startOffset = offset;
-
-        column += 1;
-        offset += 1;
-
-        let tokenType: TokenType;
+      handler: (match: RegExpExecArray): TokenType => {
         switch (match[0]) {
           case "(":
-            tokenType = TokenType.LeftParen;
-            break;
+            return TokenType.LeftParen;
           case ")":
-            tokenType = TokenType.RightParen;
-            break;
+            return TokenType.RightParen;
           case ":":
-            tokenType = TokenType.Colon;
-            break;
+            return TokenType.Colon;
           case ",":
-            tokenType = TokenType.Comma;
-            break;
+            return TokenType.Comma;
           case "+":
-            tokenType = TokenType.Plus;
-            break;
+            return TokenType.Plus;
           case "-":
-            tokenType = TokenType.Minus;
-            break;
+            return TokenType.Minus;
           case "*":
-            tokenType = TokenType.Star;
-            break;
+            return TokenType.Star;
           case "/":
-            tokenType = TokenType.Slash;
-            break;
+            return TokenType.Slash;
           default:
             throw new Error("Unreachable");
         }
-        return {
-          type: tokenType,
-          lexeme: match[0],
-          location: {
-            start: { line, column: startColumn, offset: startOffset },
-            end: { line, column, offset },
-          },
-        };
       },
     },
     {
       regexp: /[A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ][0-9A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ]*/y,
-      handler: (match: RegExpExecArray): Token => {
-        const startColumn = column;
-        const startOffset = offset;
-
-        column += match[0].length;
-        offset += match[0].length;
-
-        return {
-          type: KEYWORDS.get(match[0]) ?? TokenType.Identifier,
-          lexeme: match[0],
-          location: {
-            start: { line, column: startColumn, offset: startOffset },
-            end: { line, column, offset },
-          },
-        };
-      },
+      handler: (match: RegExpExecArray) =>
+        KEYWORDS.get(match[0]) ?? TokenType.Identifier,
     },
     {
       regexp: /[0-9]+\.[0-9]+/y,
-      handler: (match: RegExpExecArray): Token => {
-        const startColumn = column;
-        const startOffset = offset;
-
-        column += match[0].length;
-        offset += match[0].length;
-
-        return {
-          type: TokenType.Real,
-          lexeme: match[0],
-          location: {
-            start: { line, column: startColumn, offset: startOffset },
-            end: { line, column, offset },
-          },
-        };
-      },
+      handler: () => TokenType.Real,
     },
     {
       regexp: /[0-9]+/y,
-      handler: (match: RegExpExecArray): Token => {
-        const startColumn = column;
-        const startOffset = offset;
-
-        column += match[0].length;
-        offset += match[0].length;
-
-        return {
-          type: TokenType.Integer,
-          lexeme: match[0],
-          location: {
-            start: { line, column: startColumn, offset: startOffset },
-            end: { line, column, offset },
-          },
-        };
-      },
+      handler: () => TokenType.Integer,
     },
     {
       regexp: /'[^'\r\n]*'/y,
-      handler: (match: RegExpExecArray): Token => {
-        const startColumn = column;
-        const startOffset = offset;
-
-        column += match[0].length;
-        offset += match[0].length;
-
-        return {
-          type: TokenType.String,
-          lexeme: match[0],
-          location: {
-            start: { line, column: startColumn, offset: startOffset },
-            end: { line, column, offset },
-          },
-        };
-      },
+      handler: () => TokenType.String,
     },
   ];
 
@@ -189,9 +80,32 @@ export function* tokenize(input: string) {
       if (match !== null) {
         matched = true;
 
-        const token = matcher.handler(match);
-        if (token !== null) {
-          yield token;
+        const startLine = line;
+        const startColumn = column;
+        const startOffset = offset;
+        const tokenType = matcher.handler(match);
+
+        if (tokenType === TokenType.Eol) {
+          line += 1;
+          column = 1;
+        } else {
+          column += match[0].length;
+        }
+        offset += match[0].length;
+
+        if (tokenType !== null) {
+          yield {
+            type: tokenType,
+            lexeme: match[0],
+            location: {
+              start: {
+                line: startLine,
+                column: startColumn,
+                offset: startOffset,
+              },
+              end: { line, column, offset },
+            },
+          };
         }
       }
     }
