@@ -5,7 +5,20 @@ type Location = {
 };
 
 export enum TokenType {
+  // Punctuation
+  LeftParen = "LEFT_PAREN",
+  RightParen = "RIGHT_PAREN",
+  Colon = "COLON",
+  Comma = "COMMA",
+  Plus = "PLUS",
+  Minus = "MINUS",
+  Star = "STAR",
+  Slash = "SLASH",
+
+  // Newline
   Eol = "EOL",
+
+  // End of file
   Eof = "EOF",
 }
 

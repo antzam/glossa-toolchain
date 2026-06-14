@@ -41,6 +41,54 @@ export function* tokenize(input: string) {
         };
       },
     },
+    {
+      regexp: /^[():,+\-*\/]/,
+      handler: (match: RegExpExecArray): Token => {
+        const startColumn = column;
+        const startOffset = offset;
+
+        column += 1;
+        offset += 1;
+
+        let tokenType: TokenType;
+        switch (match[0]) {
+          case "(":
+            tokenType = TokenType.LeftParen;
+            break;
+          case ")":
+            tokenType = TokenType.RightParen;
+            break;
+          case ":":
+            tokenType = TokenType.Colon;
+            break;
+          case ",":
+            tokenType = TokenType.Comma;
+            break;
+          case "+":
+            tokenType = TokenType.Plus;
+            break;
+          case "-":
+            tokenType = TokenType.Minus;
+            break;
+          case "*":
+            tokenType = TokenType.Star;
+            break;
+          case "/":
+            tokenType = TokenType.Slash;
+            break;
+          default:
+            throw new Error("Unreachable");
+        }
+        return {
+          type: tokenType,
+          lexeme: match[0],
+          location: {
+            start: { line, column: startColumn, offset: startOffset },
+            end: { line, column, offset },
+          },
+        };
+      },
+    },
   ];
 
   while (input.length > 0) {

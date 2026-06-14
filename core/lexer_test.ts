@@ -87,6 +87,37 @@ Deno.test("recognizes newline sequence '\r\n'", () => {
   }]);
 });
 
+const SINGLE_CHAR_PUNCTUATION = [
+  { input: "(", type: TokenType.LeftParen },
+  { input: ")", type: TokenType.RightParen },
+  { input: ":", type: TokenType.Colon },
+  { input: ",", type: TokenType.Comma },
+  { input: "+", type: TokenType.Plus },
+  { input: "-", type: TokenType.Minus },
+  { input: "*", type: TokenType.Star },
+  { input: "/", type: TokenType.Slash },
+];
+
+for (const punctuation of SINGLE_CHAR_PUNCTUATION) {
+  Deno.test(`recognizes single character punctuation '${punctuation.input}'`, () => {
+    assertEquals(Array.from(tokenize(punctuation.input)), [{
+      type: punctuation.type,
+      lexeme: punctuation.input,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: { line: 1, column: 2, offset: 1 },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: { line: 1, column: 2, offset: 1 },
+        end: { line: 1, column: 3, offset: 2 },
+      },
+    }]);
+  });
+}
+
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
   const input = "@";
