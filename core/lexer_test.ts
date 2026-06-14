@@ -367,6 +367,29 @@ for (const n of ["1.2", "876.543", "0.00001", "55.0", "000.000"]) {
   });
 }
 
+for (const s of ["''", "' '", "'Hello'", "'Αααάά'", "'!@#$%^&*()'"]) {
+  Deno.test(`recognizes string literal "${s}"`, () => {
+    assertEquals(Array.from(tokenize(s)), [
+      {
+        type: TokenType.String,
+        lexeme: s,
+        location: {
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 1, column: s.length + 1, offset: s.length },
+        },
+      },
+      {
+        type: TokenType.Eof,
+        lexeme: "\0",
+        location: {
+          start: { line: 1, column: s.length + 1, offset: s.length },
+          end: { line: 1, column: s.length + 2, offset: s.length + 1 },
+        },
+      },
+    ]);
+  });
+}
+
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
   const input = "@";

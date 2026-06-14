@@ -160,6 +160,25 @@ export function* tokenize(input: string) {
         };
       },
     },
+    {
+      regexp: /'[^'\r\n]*'/y,
+      handler: (match: RegExpExecArray): Token => {
+        const startColumn = column;
+        const startOffset = offset;
+
+        column += match[0].length;
+        offset += match[0].length;
+
+        return {
+          type: TokenType.String,
+          lexeme: match[0],
+          location: {
+            start: { line, column: startColumn, offset: startOffset },
+            end: { line, column, offset },
+          },
+        };
+      },
+    },
   ];
 
   while (offset < input.length) {
