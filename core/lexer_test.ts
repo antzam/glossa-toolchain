@@ -336,6 +336,37 @@ for (const n of ["0", "4", "42", "1234567890", "0987654321", "874159"]) {
   });
 }
 
+for (const n of ["1.2", "876.543", "0.00001", "55.0", "000.000"]) {
+  Deno.test(`recognizes unsigned real literal '${n}'`, () => {
+    assertEquals(Array.from(tokenize(n)), [
+      {
+        type: TokenType.Real,
+        lexeme: n,
+        location: {
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 1, column: n.length + 1, offset: n.length },
+        },
+      },
+      {
+        type: TokenType.Eof,
+        lexeme: "\0",
+        location: {
+          start: {
+            line: 1,
+            column: n.length + 1,
+            offset: n.length,
+          },
+          end: {
+            line: 1,
+            column: n.length + 2,
+            offset: n.length + 1,
+          },
+        },
+      },
+    ]);
+  });
+}
+
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
   const input = "@";

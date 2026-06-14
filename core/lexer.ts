@@ -123,6 +123,25 @@ export function* tokenize(input: string) {
       },
     },
     {
+      regexp: /[0-9]+\.[0-9]+/y,
+      handler: (match: RegExpExecArray): Token => {
+        const startColumn = column;
+        const startOffset = offset;
+
+        column += match[0].length;
+        offset += match[0].length;
+
+        return {
+          type: TokenType.Real,
+          lexeme: match[0],
+          location: {
+            start: { line, column: startColumn, offset: startOffset },
+            end: { line, column, offset },
+          },
+        };
+      },
+    },
+    {
       regexp: /[0-9]+/y,
       handler: (match: RegExpExecArray): Token => {
         const startColumn = column;

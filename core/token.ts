@@ -20,6 +20,7 @@ export enum TokenType {
 
   // Literals
   Integer = "INTEGER",
+  Real = "REAL",
 
   // Punctuation
   LeftParen = "LEFT_PAREN",
