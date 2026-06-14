@@ -18,6 +18,9 @@ export enum TokenType {
   Variables = "VARIABLES",
   Write = "WRITE",
 
+  // Literals
+  Integer = "INTEGER",
+
   // Punctuation
   LeftParen = "LEFT_PAREN",
   RightParen = "RIGHT_PAREN",

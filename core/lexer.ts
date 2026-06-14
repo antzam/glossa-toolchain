@@ -104,7 +104,7 @@ export function* tokenize(input: string) {
       },
     },
     {
-      regexp: /[0-9A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ]+/y,
+      regexp: /[A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ][0-9A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ]*/y,
       handler: (match: RegExpExecArray): Token => {
         const startColumn = column;
         const startOffset = offset;
@@ -114,6 +114,25 @@ export function* tokenize(input: string) {
 
         return {
           type: KEYWORDS.get(match[0]) ?? TokenType.Identifier,
+          lexeme: match[0],
+          location: {
+            start: { line, column: startColumn, offset: startOffset },
+            end: { line, column, offset },
+          },
+        };
+      },
+    },
+    {
+      regexp: /[0-9]+/y,
+      handler: (match: RegExpExecArray): Token => {
+        const startColumn = column;
+        const startOffset = offset;
+
+        column += match[0].length;
+        offset += match[0].length;
+
+        return {
+          type: TokenType.Integer,
           lexeme: match[0],
           location: {
             start: { line, column: startColumn, offset: startOffset },
