@@ -7,6 +7,17 @@ type Location = {
 export enum TokenType {
   Identifier = "IDENTIFIER",
 
+  // Keywords
+  Begin = "BEGIN",
+  EndProgram = "END_PROGRAM",
+  IntegerVariables = "INTEGER_VARIABLES",
+  Program = "PROGRAM",
+  Read = "READ",
+  RealVariables = "REAL_VARIABLES",
+  StringVariables = "STRING_VARIABLES",
+  Variables = "VARIABLES",
+  Write = "WRITE",
+
   // Punctuation
   LeftParen = "LEFT_PAREN",
   RightParen = "RIGHT_PAREN",

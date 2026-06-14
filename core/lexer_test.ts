@@ -253,6 +253,50 @@ for (
   });
 }
 
+const KEYWORDS = [
+  { input: "ΑΚΕΡΑΙΕΣ", type: TokenType.IntegerVariables },
+  { input: "ΑΡΧΗ", type: TokenType.Begin },
+  { input: "ΓΡΑΨΕ", type: TokenType.Write },
+  { input: "ΔΙΑΒΑΣΕ", type: TokenType.Read },
+  { input: "ΜΕΤΑΒΛΗΤΕΣ", type: TokenType.Variables },
+  { input: "ΠΡΑΓΜΑΤΙΚΕΣ", type: TokenType.RealVariables },
+  { input: "ΠΡΟΓΡΑΜΜΑ", type: TokenType.Program },
+  { input: "ΤΕΛΟΣ_ΠΡΟΓΡΑΜΜΑΤΟΣ", type: TokenType.EndProgram },
+  { input: "ΧΑΡΑΚΤΗΡΕΣ", type: TokenType.StringVariables },
+];
+
+for (const keyword of KEYWORDS) {
+  Deno.test(`recognizes keyword '${keyword.input}'`, () => {
+    assertEquals(Array.from(tokenize(keyword.input)), [{
+      type: keyword.type,
+      lexeme: keyword.input,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: {
+          line: 1,
+          column: keyword.input.length + 1,
+          offset: keyword.input.length,
+        },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: {
+          line: 1,
+          column: keyword.input.length + 1,
+          offset: keyword.input.length,
+        },
+        end: {
+          line: 1,
+          column: keyword.input.length + 2,
+          offset: keyword.input.length + 1,
+        },
+      },
+    }]);
+  });
+}
+
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
   const input = "@";

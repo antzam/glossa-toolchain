@@ -1,6 +1,20 @@
 import type { Token } from "./token.ts";
 import { TokenType } from "./token.ts";
 
+const KEYWORDS = new Map(
+  [
+    ["ΑΚΕΡΑΙΕΣ", TokenType.IntegerVariables],
+    ["ΑΡΧΗ", TokenType.Begin],
+    ["ΓΡΑΨΕ", TokenType.Write],
+    ["ΔΙΑΒΑΣΕ", TokenType.Read],
+    ["ΜΕΤΑΒΛΗΤΕΣ", TokenType.Variables],
+    ["ΠΡΑΓΜΑΤΙΚΕΣ", TokenType.RealVariables],
+    ["ΠΡΟΓΡΑΜΜΑ", TokenType.Program],
+    ["ΤΕΛΟΣ_ΠΡΟΓΡΑΜΜΑΤΟΣ", TokenType.EndProgram],
+    ["ΧΑΡΑΚΤΗΡΕΣ", TokenType.StringVariables],
+  ],
+);
+
 export function* tokenize(input: string) {
   let line = 1;
   let column = 1;
@@ -99,7 +113,7 @@ export function* tokenize(input: string) {
         offset += match[0].length;
 
         return {
-          type: TokenType.Identifier,
+          type: KEYWORDS.get(match[0]) ?? TokenType.Identifier,
           lexeme: match[0],
           location: {
             start: { line, column: startColumn, offset: startOffset },
