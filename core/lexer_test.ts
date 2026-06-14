@@ -156,6 +156,64 @@ for (const punctuation of SINGLE_CHAR_PUNCTUATION) {
   });
 }
 
+for (const c of ["a", "b", "g", "z", "A", "Q", "X", "Z"]) {
+  Deno.test(`recognizes single Latin character '${c}' identifier`, () => {
+    assertEquals(Array.from(tokenize(c)), [{
+      type: TokenType.Identifier,
+      lexeme: c,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: { line: 1, column: 2, offset: 1 },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: { line: 1, column: 2, offset: 1 },
+        end: { line: 1, column: 3, offset: 2 },
+      },
+    }]);
+  });
+}
+
+for (const c of ["α", "ΐ", "ρ", "ς", "ω", "ώ", "Ά", "Α", "Έ", "Ϊ", "Χ", "Ω"]) {
+  Deno.test(`recognizes single Greek character '${c}' identifier`, () => {
+    assertEquals(Array.from(tokenize(c)), [{
+      type: TokenType.Identifier,
+      lexeme: c,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: { line: 1, column: 2, offset: 1 },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: { line: 1, column: 2, offset: 1 },
+        end: { line: 1, column: 3, offset: 2 },
+      },
+    }]);
+  });
+}
+
+Deno.test("recognizes single underscore as identifier", () => {
+  assertEquals(Array.from(tokenize("_")), [{
+    type: TokenType.Identifier,
+    lexeme: "_",
+    location: {
+      start: { line: 1, column: 1, offset: 0 },
+      end: { line: 1, column: 2, offset: 1 },
+    },
+  }, {
+    type: TokenType.Eof,
+    lexeme: "\0",
+    location: {
+      start: { line: 1, column: 2, offset: 1 },
+      end: { line: 1, column: 3, offset: 2 },
+    },
+  }]);
+});
+
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
   const input = "@";

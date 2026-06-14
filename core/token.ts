@@ -5,6 +5,8 @@ type Location = {
 };
 
 export enum TokenType {
+  Identifier = "IDENTIFIER",
+
   // Punctuation
   LeftParen = "LEFT_PAREN",
   RightParen = "RIGHT_PAREN",

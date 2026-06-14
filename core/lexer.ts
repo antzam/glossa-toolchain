@@ -89,6 +89,25 @@ export function* tokenize(input: string) {
         };
       },
     },
+    {
+      regexp: /[_A-Za-zΆΈ-ΊΌΎ-ΡΣ-ώ]/g,
+      handler: (match: RegExpExecArray): Token => {
+        const startColumn = column;
+        const startOffset = offset;
+
+        column += 1;
+        offset += 1;
+
+        return {
+          type: TokenType.Identifier,
+          lexeme: match[0],
+          location: {
+            start: { line, column: startColumn, offset: startOffset },
+            end: { line, column, offset },
+          },
+        };
+      },
+    },
   ];
 
   while (offset < input.length) {
