@@ -24,6 +24,7 @@ export enum TokenType {
   String = "STRING",
 
   // Punctuation
+  Assign = "ASSIGN",
   LeftParen = "LEFT_PAREN",
   RightParen = "RIGHT_PAREN",
   Colon = "COLON",
@@ -32,6 +33,7 @@ export enum TokenType {
   Minus = "MINUS",
   Star = "STAR",
   Slash = "SLASH",
+  Less = "LESS",
 
   // Newline
   Eol = "EOL",

@@ -54,6 +54,17 @@ export function* tokenize(input: string) {
       },
     },
     {
+      regexp: /<(-)?/y,
+      handler: (match: RegExpExecArray): TokenType => {
+        switch (match[0]) {
+          case "<-":
+            return TokenType.Assign;
+          default:
+            return TokenType.Less;
+        }
+      },
+    },
+    {
       regexp: /[A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ][0-9A-Z_a-zΆΈ-ΊΌΎ-ΡΣ-ώ]*/y,
       handler: (match: RegExpExecArray) =>
         KEYWORDS.get(match[0]) ?? TokenType.Identifier,

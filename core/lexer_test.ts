@@ -134,6 +134,7 @@ const SINGLE_CHAR_PUNCTUATION = [
   { input: "-", type: TokenType.Minus },
   { input: "*", type: TokenType.Star },
   { input: "/", type: TokenType.Slash },
+  { input: "<", type: TokenType.Less },
 ];
 
 for (const punctuation of SINGLE_CHAR_PUNCTUATION) {
@@ -155,6 +156,32 @@ for (const punctuation of SINGLE_CHAR_PUNCTUATION) {
     }]);
   });
 }
+
+const MULTIPLE_CHARACTER_PUNCTUATION = [
+  { input: "<-", type: TokenType.Assign },
+];
+
+for (const punctuation of MULTIPLE_CHARACTER_PUNCTUATION) {
+  Deno.test(`recognizes multiple character punctuation '${punctuation.input}'`, () => {
+    assertEquals(Array.from(tokenize(punctuation.input)), [{
+      type: punctuation.type,
+      lexeme: punctuation.input,
+      location: {
+        start: { line: 1, column: 1, offset: 0 },
+        end: { line: 1, column: 3, offset: 2 },
+      },
+    }, {
+      type: TokenType.Eof,
+      lexeme: "\0",
+      location: {
+        start: { line: 1, column: 3, offset: 2 },
+        end: { line: 1, column: 4, offset: 3 },
+      },
+    }]);
+  });
+}
+
+// TODO: In the parsing phase, resolve the ambiguity in the expression `x<-3`
 
 for (const c of ["a", "b", "g", "z", "A", "Q", "X", "Z"]) {
   Deno.test(`recognizes single Latin character '${c}' identifier`, () => {
