@@ -1,0 +1,1115 @@
+export const snapshot = {};
+
+snapshot[`tokenizes example file 'omm018.glossa' 1`] = `
+- type: PROGRAM
+  lexeme: ΠΡΟΓΡΑΜΜΑ
+  location:
+    start:
+      line: 1
+      column: 1
+      offset: 0
+    end:
+      line: 1
+      column: 10
+      offset: 9
+- type: IDENTIFIER
+  lexeme: Μισθός
+  location:
+    start:
+      line: 1
+      column: 11
+      offset: 10
+    end:
+      line: 1
+      column: 17
+      offset: 16
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 1
+      column: 17
+      offset: 16
+    end:
+      line: 2
+      column: 1
+      offset: 17
+- type: VARIABLES
+  lexeme: ΜΕΤΑΒΛΗΤΕΣ
+  location:
+    start:
+      line: 2
+      column: 1
+      offset: 17
+    end:
+      line: 2
+      column: 11
+      offset: 27
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 2
+      column: 11
+      offset: 27
+    end:
+      line: 3
+      column: 1
+      offset: 28
+- type: INTEGER_VARIABLES
+  lexeme: ΑΚΕΡΑΙΕΣ
+  location:
+    start:
+      line: 3
+      column: 3
+      offset: 30
+    end:
+      line: 3
+      column: 11
+      offset: 38
+- type: COLON
+  lexeme: ':'
+  location:
+    start:
+      line: 3
+      column: 11
+      offset: 38
+    end:
+      line: 3
+      column: 12
+      offset: 39
+- type: IDENTIFIER
+  lexeme: Χρ
+  location:
+    start:
+      line: 3
+      column: 13
+      offset: 40
+    end:
+      line: 3
+      column: 15
+      offset: 42
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 3
+      column: 15
+      offset: 42
+    end:
+      line: 3
+      column: 16
+      offset: 43
+- type: IDENTIFIER
+  lexeme: Επίδομα
+  location:
+    start:
+      line: 3
+      column: 17
+      offset: 44
+    end:
+      line: 3
+      column: 24
+      offset: 51
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 3
+      column: 24
+      offset: 51
+    end:
+      line: 4
+      column: 1
+      offset: 52
+- type: REAL_VARIABLES
+  lexeme: ΠΡΑΓΜΑΤΙΚΕΣ
+  location:
+    start:
+      line: 4
+      column: 3
+      offset: 54
+    end:
+      line: 4
+      column: 14
+      offset: 65
+- type: COLON
+  lexeme: ':'
+  location:
+    start:
+      line: 4
+      column: 14
+      offset: 65
+    end:
+      line: 4
+      column: 15
+      offset: 66
+- type: IDENTIFIER
+  lexeme: Φόρος
+  location:
+    start:
+      line: 4
+      column: 16
+      offset: 67
+    end:
+      line: 4
+      column: 21
+      offset: 72
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 4
+      column: 21
+      offset: 72
+    end:
+      line: 4
+      column: 22
+      offset: 73
+- type: IDENTIFIER
+  lexeme: Χαρτόσημο
+  location:
+    start:
+      line: 4
+      column: 23
+      offset: 74
+    end:
+      line: 4
+      column: 32
+      offset: 83
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 4
+      column: 32
+      offset: 83
+    end:
+      line: 4
+      column: 33
+      offset: 84
+- type: IDENTIFIER
+  lexeme: Πληρωτέο
+  location:
+    start:
+      line: 4
+      column: 34
+      offset: 85
+    end:
+      line: 4
+      column: 42
+      offset: 93
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 4
+      column: 42
+      offset: 93
+    end:
+      line: 5
+      column: 1
+      offset: 94
+- type: STRING_VARIABLES
+  lexeme: ΧΑΡΑΚΤΗΡΕΣ
+  location:
+    start:
+      line: 5
+      column: 3
+      offset: 96
+    end:
+      line: 5
+      column: 13
+      offset: 106
+- type: COLON
+  lexeme: ':'
+  location:
+    start:
+      line: 5
+      column: 13
+      offset: 106
+    end:
+      line: 5
+      column: 14
+      offset: 107
+- type: IDENTIFIER
+  lexeme: Ον
+  location:
+    start:
+      line: 5
+      column: 15
+      offset: 108
+    end:
+      line: 5
+      column: 17
+      offset: 110
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 5
+      column: 17
+      offset: 110
+    end:
+      line: 6
+      column: 1
+      offset: 111
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 6
+      column: 1
+      offset: 111
+    end:
+      line: 7
+      column: 1
+      offset: 112
+- type: BEGIN
+  lexeme: ΑΡΧΗ
+  location:
+    start:
+      line: 7
+      column: 1
+      offset: 112
+    end:
+      line: 7
+      column: 5
+      offset: 116
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 7
+      column: 5
+      offset: 116
+    end:
+      line: 8
+      column: 1
+      offset: 117
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 8
+      column: 3
+      offset: 119
+    end:
+      line: 8
+      column: 8
+      offset: 124
+- type: STRING
+  lexeme: '''Όνομα υπαλλήλου: '''
+  location:
+    start:
+      line: 8
+      column: 9
+      offset: 125
+    end:
+      line: 8
+      column: 28
+      offset: 144
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 8
+      column: 28
+      offset: 144
+    end:
+      line: 9
+      column: 1
+      offset: 145
+- type: READ
+  lexeme: ΔΙΑΒΑΣΕ
+  location:
+    start:
+      line: 9
+      column: 3
+      offset: 147
+    end:
+      line: 9
+      column: 10
+      offset: 154
+- type: IDENTIFIER
+  lexeme: Ον
+  location:
+    start:
+      line: 9
+      column: 11
+      offset: 155
+    end:
+      line: 9
+      column: 13
+      offset: 157
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 9
+      column: 13
+      offset: 157
+    end:
+      line: 10
+      column: 1
+      offset: 158
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 10
+      column: 3
+      offset: 160
+    end:
+      line: 10
+      column: 8
+      offset: 165
+- type: STRING
+  lexeme: '''Χρόνια Υπηρεσίας: '''
+  location:
+    start:
+      line: 10
+      column: 9
+      offset: 166
+    end:
+      line: 10
+      column: 29
+      offset: 186
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 10
+      column: 29
+      offset: 186
+    end:
+      line: 11
+      column: 1
+      offset: 187
+- type: READ
+  lexeme: ΔΙΑΒΑΣΕ
+  location:
+    start:
+      line: 11
+      column: 3
+      offset: 189
+    end:
+      line: 11
+      column: 10
+      offset: 196
+- type: IDENTIFIER
+  lexeme: Χρ
+  location:
+    start:
+      line: 11
+      column: 11
+      offset: 197
+    end:
+      line: 11
+      column: 13
+      offset: 199
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 11
+      column: 13
+      offset: 199
+    end:
+      line: 12
+      column: 1
+      offset: 200
+- type: IDENTIFIER
+  lexeme: Επίδομα
+  location:
+    start:
+      line: 12
+      column: 3
+      offset: 202
+    end:
+      line: 12
+      column: 10
+      offset: 209
+- type: ASSIGN
+  lexeme: <-
+  location:
+    start:
+      line: 12
+      column: 11
+      offset: 210
+    end:
+      line: 12
+      column: 13
+      offset: 212
+- type: IDENTIFIER
+  lexeme: Χρ
+  location:
+    start:
+      line: 12
+      column: 14
+      offset: 213
+    end:
+      line: 12
+      column: 16
+      offset: 215
+- type: STAR
+  lexeme: '*'
+  location:
+    start:
+      line: 12
+      column: 16
+      offset: 215
+    end:
+      line: 12
+      column: 17
+      offset: 216
+- type: INTEGER
+  lexeme: '12'
+  location:
+    start:
+      line: 12
+      column: 18
+      offset: 217
+    end:
+      line: 12
+      column: 20
+      offset: 219
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 12
+      column: 20
+      offset: 219
+    end:
+      line: 13
+      column: 1
+      offset: 220
+- type: IDENTIFIER
+  lexeme: Φόρος
+  location:
+    start:
+      line: 13
+      column: 3
+      offset: 222
+    end:
+      line: 13
+      column: 8
+      offset: 227
+- type: ASSIGN
+  lexeme: <-
+  location:
+    start:
+      line: 13
+      column: 9
+      offset: 228
+    end:
+      line: 13
+      column: 11
+      offset: 230
+- type: INTEGER
+  lexeme: '537'
+  location:
+    start:
+      line: 13
+      column: 12
+      offset: 231
+    end:
+      line: 13
+      column: 15
+      offset: 234
+- type: STAR
+  lexeme: '*'
+  location:
+    start:
+      line: 13
+      column: 15
+      offset: 234
+    end:
+      line: 13
+      column: 16
+      offset: 235
+- type: INTEGER
+  lexeme: '15'
+  location:
+    start:
+      line: 13
+      column: 17
+      offset: 236
+    end:
+      line: 13
+      column: 19
+      offset: 238
+- type: SLASH
+  lexeme: /
+  location:
+    start:
+      line: 13
+      column: 19
+      offset: 238
+    end:
+      line: 13
+      column: 20
+      offset: 239
+- type: INTEGER
+  lexeme: '100'
+  location:
+    start:
+      line: 13
+      column: 20
+      offset: 239
+    end:
+      line: 13
+      column: 23
+      offset: 242
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 13
+      column: 23
+      offset: 242
+    end:
+      line: 14
+      column: 1
+      offset: 243
+- type: IDENTIFIER
+  lexeme: Χαρτόσημο
+  location:
+    start:
+      line: 14
+      column: 3
+      offset: 245
+    end:
+      line: 14
+      column: 12
+      offset: 254
+- type: ASSIGN
+  lexeme: <-
+  location:
+    start:
+      line: 14
+      column: 13
+      offset: 255
+    end:
+      line: 14
+      column: 15
+      offset: 257
+- type: INTEGER
+  lexeme: '537'
+  location:
+    start:
+      line: 14
+      column: 16
+      offset: 258
+    end:
+      line: 14
+      column: 19
+      offset: 261
+- type: STAR
+  lexeme: '*'
+  location:
+    start:
+      line: 14
+      column: 19
+      offset: 261
+    end:
+      line: 14
+      column: 20
+      offset: 262
+- type: INTEGER
+  lexeme: '2'
+  location:
+    start:
+      line: 14
+      column: 21
+      offset: 263
+    end:
+      line: 14
+      column: 22
+      offset: 264
+- type: SLASH
+  lexeme: /
+  location:
+    start:
+      line: 14
+      column: 22
+      offset: 264
+    end:
+      line: 14
+      column: 23
+      offset: 265
+- type: INTEGER
+  lexeme: '100'
+  location:
+    start:
+      line: 14
+      column: 23
+      offset: 265
+    end:
+      line: 14
+      column: 26
+      offset: 268
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 14
+      column: 26
+      offset: 268
+    end:
+      line: 15
+      column: 1
+      offset: 269
+- type: IDENTIFIER
+  lexeme: Πληρωτέο
+  location:
+    start:
+      line: 15
+      column: 3
+      offset: 271
+    end:
+      line: 15
+      column: 11
+      offset: 279
+- type: ASSIGN
+  lexeme: <-
+  location:
+    start:
+      line: 15
+      column: 12
+      offset: 280
+    end:
+      line: 15
+      column: 14
+      offset: 282
+- type: INTEGER
+  lexeme: '537'
+  location:
+    start:
+      line: 15
+      column: 15
+      offset: 283
+    end:
+      line: 15
+      column: 18
+      offset: 286
+- type: PLUS
+  lexeme: +
+  location:
+    start:
+      line: 15
+      column: 19
+      offset: 287
+    end:
+      line: 15
+      column: 20
+      offset: 288
+- type: IDENTIFIER
+  lexeme: Επίδομα
+  location:
+    start:
+      line: 15
+      column: 21
+      offset: 289
+    end:
+      line: 15
+      column: 28
+      offset: 296
+- type: MINUS
+  lexeme: '-'
+  location:
+    start:
+      line: 15
+      column: 29
+      offset: 297
+    end:
+      line: 15
+      column: 30
+      offset: 298
+- type: LEFT_PAREN
+  lexeme: (
+  location:
+    start:
+      line: 15
+      column: 31
+      offset: 299
+    end:
+      line: 15
+      column: 32
+      offset: 300
+- type: IDENTIFIER
+  lexeme: Χαρτόσημο
+  location:
+    start:
+      line: 15
+      column: 32
+      offset: 300
+    end:
+      line: 15
+      column: 41
+      offset: 309
+- type: PLUS
+  lexeme: +
+  location:
+    start:
+      line: 15
+      column: 42
+      offset: 310
+    end:
+      line: 15
+      column: 43
+      offset: 311
+- type: IDENTIFIER
+  lexeme: Φόρος
+  location:
+    start:
+      line: 15
+      column: 44
+      offset: 312
+    end:
+      line: 15
+      column: 49
+      offset: 317
+- type: RIGHT_PAREN
+  lexeme: )
+  location:
+    start:
+      line: 15
+      column: 49
+      offset: 317
+    end:
+      line: 15
+      column: 50
+      offset: 318
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 15
+      column: 50
+      offset: 318
+    end:
+      line: 16
+      column: 1
+      offset: 319
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 16
+      column: 3
+      offset: 321
+    end:
+      line: 16
+      column: 8
+      offset: 326
+- type: STRING
+  lexeme: '''Βασικός Μισθός 537 €'''
+  location:
+    start:
+      line: 16
+      column: 9
+      offset: 327
+    end:
+      line: 16
+      column: 31
+      offset: 349
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 16
+      column: 31
+      offset: 349
+    end:
+      line: 17
+      column: 1
+      offset: 350
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 17
+      column: 3
+      offset: 352
+    end:
+      line: 17
+      column: 8
+      offset: 357
+- type: STRING
+  lexeme: '''Επίδομα:'''
+  location:
+    start:
+      line: 17
+      column: 9
+      offset: 358
+    end:
+      line: 17
+      column: 19
+      offset: 368
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 17
+      column: 19
+      offset: 368
+    end:
+      line: 17
+      column: 20
+      offset: 369
+- type: IDENTIFIER
+  lexeme: Επίδομα
+  location:
+    start:
+      line: 17
+      column: 21
+      offset: 370
+    end:
+      line: 17
+      column: 28
+      offset: 377
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 17
+      column: 28
+      offset: 377
+    end:
+      line: 18
+      column: 1
+      offset: 378
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 18
+      column: 3
+      offset: 380
+    end:
+      line: 18
+      column: 8
+      offset: 385
+- type: STRING
+  lexeme: '''Φόρος:'''
+  location:
+    start:
+      line: 18
+      column: 9
+      offset: 386
+    end:
+      line: 18
+      column: 17
+      offset: 394
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 18
+      column: 17
+      offset: 394
+    end:
+      line: 18
+      column: 18
+      offset: 395
+- type: IDENTIFIER
+  lexeme: Φόρος
+  location:
+    start:
+      line: 18
+      column: 19
+      offset: 396
+    end:
+      line: 18
+      column: 24
+      offset: 401
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 18
+      column: 24
+      offset: 401
+    end:
+      line: 19
+      column: 1
+      offset: 402
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 19
+      column: 3
+      offset: 404
+    end:
+      line: 19
+      column: 8
+      offset: 409
+- type: STRING
+  lexeme: '''Χαρτόσημο:'''
+  location:
+    start:
+      line: 19
+      column: 9
+      offset: 410
+    end:
+      line: 19
+      column: 21
+      offset: 422
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 19
+      column: 21
+      offset: 422
+    end:
+      line: 19
+      column: 22
+      offset: 423
+- type: IDENTIFIER
+  lexeme: Χαρτόσημο
+  location:
+    start:
+      line: 19
+      column: 23
+      offset: 424
+    end:
+      line: 19
+      column: 32
+      offset: 433
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 19
+      column: 32
+      offset: 433
+    end:
+      line: 20
+      column: 1
+      offset: 434
+- type: WRITE
+  lexeme: ΓΡΑΨΕ
+  location:
+    start:
+      line: 20
+      column: 3
+      offset: 436
+    end:
+      line: 20
+      column: 8
+      offset: 441
+- type: STRING
+  lexeme: '''Μισθός:'''
+  location:
+    start:
+      line: 20
+      column: 9
+      offset: 442
+    end:
+      line: 20
+      column: 18
+      offset: 451
+- type: COMMA
+  lexeme: ','
+  location:
+    start:
+      line: 20
+      column: 18
+      offset: 451
+    end:
+      line: 20
+      column: 19
+      offset: 452
+- type: IDENTIFIER
+  lexeme: Πληρωτέο
+  location:
+    start:
+      line: 20
+      column: 20
+      offset: 453
+    end:
+      line: 20
+      column: 28
+      offset: 461
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 20
+      column: 28
+      offset: 461
+    end:
+      line: 21
+      column: 1
+      offset: 462
+- type: END_PROGRAM
+  lexeme: ΤΕΛΟΣ_ΠΡΟΓΡΑΜΜΑΤΟΣ
+  location:
+    start:
+      line: 21
+      column: 1
+      offset: 462
+    end:
+      line: 21
+      column: 19
+      offset: 480
+- type: IDENTIFIER
+  lexeme: Μισθός
+  location:
+    start:
+      line: 21
+      column: 20
+      offset: 481
+    end:
+      line: 21
+      column: 26
+      offset: 487
+- type: EOL
+  lexeme: |+
+
+  location:
+    start:
+      line: 21
+      column: 26
+      offset: 487
+    end:
+      line: 22
+      column: 1
+      offset: 488
+- type: EOF
+  lexeme: "\\0"
+  location:
+    start:
+      line: 22
+      column: 1
+      offset: 488
+    end:
+      line: 22
+      column: 2
+      offset: 489
+
+`;

@@ -1,6 +1,18 @@
 {
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/testing": "jsr:@std/testing@1",
+    "@std/yaml": "jsr:@std/yaml@^1.1.1"
   },
-  "workspace": ["./core"]
+  "workspace": ["./core"],
+  "test": {
+    "permissions": {
+      "read": {
+        "allow": ["./core/corpus"]
+      },
+      "write": {
+        "allow": ["./core/corpus/__snapshots__"]
+      }
+    }
+  }
 }
