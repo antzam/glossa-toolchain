@@ -1,6 +1,6 @@
 import { createAssertSnapshot } from "@std/testing/snapshot";
 import { stringify } from "@std/yaml";
-import { tokenize } from "../lexer.ts";
+import { Lexer } from "../lexer.ts";
 
 const assertSnapshot = createAssertSnapshot({
   serializer: stringify,
@@ -8,5 +8,6 @@ const assertSnapshot = createAssertSnapshot({
 
 Deno.test("tokenizes example file 'omm018.glossa'", async (t) => {
   const source = await Deno.readTextFile("core/corpus/omm018.glossa");
-  await assertSnapshot(t, Array.from(tokenize(source)));
+  const lexer = new Lexer();
+  await assertSnapshot(t, Array.from(lexer.tokenize(source)));
 });
