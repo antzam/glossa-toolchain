@@ -1,3 +1,4 @@
+import type { Token } from "./token.ts";
 import { TokenType } from "./token.ts";
 
 const KEYWORDS = new Map(
@@ -79,51 +80,72 @@ const MATCHERS = [
 ];
 
 export class Lexer {
-  *tokenize(input: string) {
-    let line = 1;
-    let column = 1;
-    let offset = 0;
+  private readonly input: string;
+  private line = 1;
+  private column = 1;
+  private offset = 0;
 
-    while (offset < input.length) {
-      let matched = false;
-      for (const matcher of MATCHERS) {
-        matcher.regexp.lastIndex = offset;
-        const match = matcher.regexp.exec(input);
-        if (match !== null) {
-          matched = true;
+  constructor(input: string) {
+    this.input = input;
+  }
 
-          const startLine = line;
-          const startColumn = column;
-          const startOffset = offset;
-          const tokenType = matcher.handler(match);
+  private isAtEnd(): boolean {
+    return this.offset >= this.input.length;
+  }
 
-          if (tokenType === TokenType.Eol) {
-            line += 1;
-            column = 1;
-          } else {
-            column += match[0].length;
-          }
-          offset += match[0].length;
+  private nextToken(): Token | null {
+    if (this.isAtEnd()) return null;
 
-          if (tokenType !== null) {
-            yield {
-              type: tokenType,
-              lexeme: match[0],
-              location: {
-                start: {
-                  line: startLine,
-                  column: startColumn,
-                  offset: startOffset,
-                },
-                end: { line, column, offset },
+    for (const { regexp, handler } of MATCHERS) {
+      regexp.lastIndex = this.offset;
+      const match = regexp.exec(this.input);
+
+      if (match !== null) {
+        const startLine = this.line;
+        const startColumn = this.column;
+        const startOffset = this.offset;
+        const tokenType = handler(match);
+
+        if (tokenType === TokenType.Eol) {
+          this.line += 1;
+          this.column = 1;
+        } else {
+          this.column += match[0].length;
+        }
+        this.offset += match[0].length;
+
+        if (tokenType !== null) {
+          return {
+            type: tokenType,
+            lexeme: match[0],
+            location: {
+              start: {
+                line: startLine,
+                column: startColumn,
+                offset: startOffset,
               },
-            };
-          }
+              end: {
+                line: this.line,
+                column: this.column,
+                offset: this.offset,
+              },
+            },
+          };
+        } else {
+          return null;
         }
       }
+    }
 
-      if (!matched) {
-        throw new Error("Unexpected character");
+    // TODO: Replace with proper error handling
+    throw new Error("Unexpected character");
+  }
+
+  *tokens(): Generator<Token> {
+    while (!this.isAtEnd()) {
+      const token = this.nextToken();
+      if (token !== null) {
+        yield token;
       }
     }
 
@@ -131,8 +153,12 @@ export class Lexer {
       type: TokenType.Eof,
       lexeme: "\0",
       location: {
-        start: { line, column, offset },
-        end: { line, column: column + 1, offset: offset + 1 },
+        start: { line: this.line, column: this.column, offset: this.offset },
+        end: {
+          line: this.line,
+          column: this.column + 1,
+          offset: this.offset + 1,
+        },
       },
     };
   }

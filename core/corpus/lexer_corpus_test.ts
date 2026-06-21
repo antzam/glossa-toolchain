@@ -8,6 +8,6 @@ const assertSnapshot = createAssertSnapshot({
 
 Deno.test("tokenizes example file 'omm018.glossa'", async (t) => {
   const source = await Deno.readTextFile("core/corpus/omm018.glossa");
-  const lexer = new Lexer();
-  await assertSnapshot(t, Array.from(lexer.tokenize(source)));
+  const lexer = new Lexer(source);
+  await assertSnapshot(t, Array.from(lexer.tokens()));
 });

@@ -3,8 +3,8 @@ import { TokenType } from "./token.ts";
 import { Lexer } from "./lexer.ts";
 
 Deno.test("returns single EOF token on empty input", () => {
-  const lexer = new Lexer();
-  assertEquals(Array.from(lexer.tokenize("")), [{
+  const lexer = new Lexer("");
+  assertEquals(Array.from(lexer.tokens()), [{
     type: TokenType.Eof,
     lexeme: "\0",
     location: {
@@ -20,9 +20,9 @@ for (
     description: "'\\t'",
   }]
 ) {
-  const lexer = new Lexer();
   Deno.test(`ignores whitespace character ${ws.description}`, () => {
-    assertEquals(Array.from(lexer.tokenize(ws.input)), [{
+    const lexer = new Lexer(ws.input);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: TokenType.Eof,
       lexeme: "\0",
       location: {
@@ -34,9 +34,9 @@ for (
 }
 
 Deno.test("ignores input with only whitespace", () => {
-  const lexer = new Lexer();
   const input = "  \t \t  ";
-  const tokens = Array.from(lexer.tokenize(input));
+  const lexer = new Lexer(input);
+  const tokens = Array.from(lexer.tokens());
   assertEquals(tokens, [{
     type: TokenType.Eof,
     lexeme: "\0",
@@ -54,8 +54,8 @@ for (
   }]
 ) {
   Deno.test(`recognizes newline character ${newline.description}`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(newline.input)), [{
+    const lexer = new Lexer(newline.input);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: TokenType.Eol,
       lexeme: newline.input,
       location: {
@@ -74,8 +74,8 @@ for (
 }
 
 Deno.test("recognizes newline sequence '\r\n'", () => {
-  const lexer = new Lexer();
-  assertEquals(Array.from(lexer.tokenize("\r\n")), [{
+  const lexer = new Lexer("\r\n");
+  assertEquals(Array.from(lexer.tokens()), [{
     type: TokenType.Eol,
     lexeme: "\r\n",
     location: {
@@ -93,9 +93,9 @@ Deno.test("recognizes newline sequence '\r\n'", () => {
 });
 
 Deno.test("recognizes multiple newlines with intervening whitespace", () => {
-  const lexer = new Lexer();
   const input = "   \n\t\n \t \n";
-  assertEquals(Array.from(lexer.tokenize(input)), [
+  const lexer = new Lexer(input);
+  assertEquals(Array.from(lexer.tokens()), [
     {
       type: TokenType.Eol,
       lexeme: "\n",
@@ -145,8 +145,8 @@ const SINGLE_CHAR_PUNCTUATION = [
 
 for (const punctuation of SINGLE_CHAR_PUNCTUATION) {
   Deno.test(`recognizes single character punctuation '${punctuation.input}'`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(punctuation.input)), [{
+    const lexer = new Lexer(punctuation.input);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: punctuation.type,
       lexeme: punctuation.input,
       location: {
@@ -170,8 +170,8 @@ const MULTIPLE_CHARACTER_PUNCTUATION = [
 
 for (const punctuation of MULTIPLE_CHARACTER_PUNCTUATION) {
   Deno.test(`recognizes multiple character punctuation '${punctuation.input}'`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(punctuation.input)), [{
+    const lexer = new Lexer(punctuation.input);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: punctuation.type,
       lexeme: punctuation.input,
       location: {
@@ -193,8 +193,8 @@ for (const punctuation of MULTIPLE_CHARACTER_PUNCTUATION) {
 
 for (const c of ["a", "b", "g", "z", "A", "Q", "X", "Z"]) {
   Deno.test(`recognizes single Latin character '${c}' identifier`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(c)), [{
+    const lexer = new Lexer(c);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: TokenType.Identifier,
       lexeme: c,
       location: {
@@ -214,8 +214,8 @@ for (const c of ["a", "b", "g", "z", "A", "Q", "X", "Z"]) {
 
 for (const c of ["α", "ΐ", "ρ", "ς", "ω", "ώ", "Ά", "Α", "Έ", "Ϊ", "Χ", "Ω"]) {
   Deno.test(`recognizes single Greek character '${c}' identifier`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(c)), [{
+    const lexer = new Lexer(c);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: TokenType.Identifier,
       lexeme: c,
       location: {
@@ -234,8 +234,8 @@ for (const c of ["α", "ΐ", "ρ", "ς", "ω", "ώ", "Ά", "Α", "Έ", "Ϊ", "Χ
 }
 
 Deno.test("recognizes single underscore as identifier", () => {
-  const lexer = new Lexer();
-  assertEquals(Array.from(lexer.tokenize("_")), [{
+  const lexer = new Lexer("_");
+  assertEquals(Array.from(lexer.tokens()), [{
     type: TokenType.Identifier,
     lexeme: "_",
     location: {
@@ -261,8 +261,8 @@ for (
   ]
 ) {
   Deno.test(`recognizes mixed-character identifier '${identifier}'`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(identifier)), [{
+    const lexer = new Lexer(identifier);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: TokenType.Identifier,
       lexeme: identifier,
       location: {
@@ -306,8 +306,8 @@ const KEYWORDS = [
 
 for (const keyword of KEYWORDS) {
   Deno.test(`recognizes keyword '${keyword.input}'`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(keyword.input)), [{
+    const lexer = new Lexer(keyword.input);
+    assertEquals(Array.from(lexer.tokens()), [{
       type: keyword.type,
       lexeme: keyword.input,
       location: {
@@ -339,8 +339,8 @@ for (const keyword of KEYWORDS) {
 
 for (const n of ["0", "4", "42", "1234567890", "0987654321", "874159"]) {
   Deno.test(`recognizes unsigned integer literal '${n}'`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(n)), [
+    const lexer = new Lexer(n);
+    assertEquals(Array.from(lexer.tokens()), [
       {
         type: TokenType.Integer,
         lexeme: n,
@@ -379,8 +379,8 @@ for (const n of ["0", "4", "42", "1234567890", "0987654321", "874159"]) {
 
 for (const n of ["1.2", "876.543", "0.00001", "55.0", "000.000"]) {
   Deno.test(`recognizes unsigned real literal '${n}'`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(n)), [
+    const lexer = new Lexer(n);
+    assertEquals(Array.from(lexer.tokens()), [
       {
         type: TokenType.Real,
         lexeme: n,
@@ -411,8 +411,8 @@ for (const n of ["1.2", "876.543", "0.00001", "55.0", "000.000"]) {
 
 for (const s of ["''", "' '", "'Hello'", "'Αααάά'", "'!@#$%^&*()'"]) {
   Deno.test(`recognizes string literal "${s}"`, () => {
-    const lexer = new Lexer();
-    assertEquals(Array.from(lexer.tokenize(s)), [
+    const lexer = new Lexer(s);
+    assertEquals(Array.from(lexer.tokens()), [
       {
         type: TokenType.String,
         lexeme: s,
@@ -435,11 +435,10 @@ for (const s of ["''", "' '", "'Hello'", "'Αααάά'", "'!@#$%^&*()'"]) {
 
 // TODO: replace exceptions with error reporting
 Deno.test("throws error on unexpected character", () => {
-  const lexer = new Lexer();
-  const input = "@";
+  const lexer = new Lexer("@");
   assertThrows(
     () => {
-      Array.from(lexer.tokenize(input));
+      Array.from(lexer.tokens());
     },
     Error,
     "Unexpected character",
